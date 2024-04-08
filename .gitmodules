@@ -1,0 +1,9 @@
+[submodule "MLSP_Data"]
+	path = MLSP_Data
+	url = https://github.com/MLSP2024/MLSP_Data
+[submodule "Word-Frequency-List-for-Sinhala"]
+	path = Word-Frequency-List-for-Sinhala
+	url = https://github.com/nlpcuom/Word-Frequency-List-for-Sinhala
+[submodule "tubelex"]
+	path = tubelex
+	url = https://github.com/adno/tubelex
