@@ -168,8 +168,8 @@ def parse_args() -> argparse.Namespace:
         ))
     parser.add_argument(
         '--subtitles', nargs='*',
-        default=['ca', 'en', 'es', 'pt', 'ja'], help=(
-            'Use subtitles for these language codes. Default: ca en es pt ja.'
+        default=['ja'], help=(
+            'Use subtitles for these language codes. Default: ja.'
             )
         )
     parser.add_argument(
