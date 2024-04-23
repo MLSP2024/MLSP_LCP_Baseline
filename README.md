@@ -14,9 +14,7 @@ Note that the trained [models](models) and [output](output) of the baseline are 
 2. Install the [requirements](requirements.txt):
 	
 	```python -m pip install -r requirements.txt```
-
-3. Place gold standard data in the `MLSP_Organisers` directory.
     
-4. Run the baseline (both training and prediction):
+3. Run the baseline (both training and prediction):
 
     ```bash experiments.sh```
