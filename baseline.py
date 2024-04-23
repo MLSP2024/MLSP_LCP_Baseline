@@ -229,7 +229,7 @@ def main(args: argparse.Namespace):
     assert (
         train or
         (len(input_files) == len(output_files))
-        ), (model_dir, len(input_files), len(output_files))
+        ), (train, len(input_files), len(output_files))
 
     ja_tagger = tagger_from_args(args)
 
