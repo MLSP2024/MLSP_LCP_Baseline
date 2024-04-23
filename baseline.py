@@ -154,6 +154,10 @@ def parse_args() -> argparse.Namespace:
         '--force', '-f', action='store_true', help='Force train (even with test data).'
         )
     parser.add_argument(
+        '--metrics', '-m', action='store_true',
+        help='Print metrics when doing inference.'
+        )
+    parser.add_argument(
         '--skip-errors', '-s', action='store_true',
         help='Warn on parsing errors and skip.'
         )
@@ -162,7 +166,8 @@ def parse_args() -> argparse.Namespace:
         help='Input files in LCP format (default all train or test).'
         )
     parser.add_argument('--output-files', '-o', nargs='*', default=[], help=(
-        'Output files in LCP format. If single name is given for multiple input files, '
+        'Output files in LCP format when doing inference. '
+        'If single name is given for multiple input files, '
         'it is understood as a directory name for multiple files. '
         'Default: output (output.tsv).'
         ))
@@ -300,7 +305,7 @@ def main(args: argparse.Namespace):
             'f_mean\tf_sd\tf_min\tf_max\t'
             'c_mean\tc_sd\tc_min\tc_max'
             )
-    elif not train:
+    elif not train and args.metrics:
         print('file\tlanguage\tPearson\'s r\tMAE\tMSE\tR2')
 
     for path_in, path_out in zip_longest(input_files, output_files):
@@ -380,14 +385,18 @@ def main(args: argparse.Namespace):
                     linear_regression = load(model_path)
                     pred    = linear_regression.predict(logf.reshape(-1, 1))
                     pred    = np.minimum(1.0, np.maximum(0.0, pred))    # clip to 0...1
-                    if c is not None:
+                    if args.metrics:
+                        if c is None:
+                            raise Exception(
+                                'Missing gold labels, cannot compute metrics.'
+                                )
                         r = pearson_r(c, pred)
                         mae = mae_score(c, pred)
                         mse = mse_score(c, pred)
                         r2 = r2_score(c, pred)
                         print(
-                            f'{path_in}\t{LANG2FULL_NAME[lang]}\t{r:.4f}\t{mae:.4f}\t{mse:.4f}\t'
-                            f'{r2:.4f}'
+                            f'{path_in}\t{LANG2FULL_NAME[lang]}\t{r:.4f}\t{mae:.4f}\t'
+                            f'{mse:.4f}\t{r2:.4f}'
                             )
                     for fields, p in zip(data, pred):
                         print('\t'.join((
