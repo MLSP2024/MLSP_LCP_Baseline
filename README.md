@@ -1,6 +1,6 @@
 # MLSP_LCP_Baseline
 
-A baseline modelled as a linear regression on log-frequency. The frequency baseline is trained using log-frequency (minimum value if the target consists of multiple tokens) on the trial set for each language. We use frequencies provided by the [`wordfreq` package](https://pypi.org/project/wordfreq/) when possible. Additionally, since the package uses an incompatible tokenization for Japanese and does not provide any data for Sinahala, we use [TUBELEX-JA](https://github.com/adno/tubelex) for Japanese, and a [word frequency list for Sinhala](https://github.com/nlpcuom/Word-Frequency-List-for-Sinhala).
+A baseline modelled as a linear regression on log-frequency. The frequency baseline is trained using log-frequency (minimum value if the target consists of multiple tokens) on the trial set for each language. We use frequencies provided by the [`wordfreq` package](https://pypi.org/project/wordfreq/) when possible. Additionally, since the package uses an incompatible tokenization for Japanese and does not provide any data for Sinahala, we use [TUBELEX-JA](https://github.com/adno/tubelex) for Japanese, and the [word frequency list for Sinhala](https://github.com/nlpcuom/Word-Frequency-List-for-Sinhala).
 
 
 ## Reproducing the baseline
